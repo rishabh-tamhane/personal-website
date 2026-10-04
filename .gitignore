@@ -1,0 +1,28 @@
+# Local planning and design notes
+docs/
+
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+build/
+next-env.d.ts
+
+# Test and coverage output
+coverage/
+playwright-report/
+test-results/
+
+# Local environment values
+.env*
+!.env.example
+
+# Tool and operating-system files
+*.tsbuildinfo
+.DS_Store
+
+# Package-manager and hosting debug files
+npm-debug.log*
+.vercel/
