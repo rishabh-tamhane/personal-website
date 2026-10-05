@@ -27,8 +27,8 @@ export default function HomePage() {
             <Link href="/writing">View all writing</Link>
           </div>
           <EmptyState
-            description="The first article will arrive with the MDX publishing system in Milestone 3."
-            title="The notebook is still opening."
+            description="The first published articles will appear soon. I am still building the site."
+            title="Thoughts under construction."
           />
         </section>
 

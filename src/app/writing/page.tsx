@@ -5,7 +5,7 @@ import styles from "../subpage.module.css";
 
 export const metadata: Metadata = {
   title: "Writing",
-  description: "Writing by Rishabh Tamhane about software, learning, and life.",
+  description: "Writing by Rishabh Tamhane about software, learning and life.",
 };
 
 export default function WritingPage() {
@@ -16,7 +16,7 @@ export default function WritingPage() {
           <p className={styles.eyebrow}>Notes and essays</p>
           <h1>Writing</h1>
           <p>
-            Things I learn, things I build, and thoughts I don’t want to lose.
+            Things I learn, things I build and thoughts I don’t want to lose.
           </p>
         </header>
         <EmptyState
