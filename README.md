@@ -2,7 +2,9 @@
 
 The source for Rishabh Tamhane's personal website: writing, projects, and current interests.
 
-V1 is a statically exported Next.js site intended for Cloudflare Pages.
+V1 is a statically exported Next.js site deployed as Cloudflare Worker static
+assets. The Worker serves the generated files directly; V1 does not run
+request-time application code.
 
 ## Prerequisites
 
@@ -34,11 +36,11 @@ npm run test:e2e      # Run browser tests once they are added
 
 ## Deployment contract
 
-Cloudflare Pages should use:
+Cloudflare Workers Builds uses:
 
 - Production branch: `main`
 - Build command: `npm run build`
-- Build output directory: `out`
+- Deploy command: `npx wrangler@4.147.0 deploy --name personal-website-1 --assets ./out --compatibility-date 2026-10-01`
 - Node.js major version: `24`
 
 The `docs/` directory contains local planning and learning notes and is intentionally excluded from Git.

@@ -16,7 +16,7 @@ Build `rishabhtamhane.com`, a minimal, elegant personal website for Rishabh's wr
 - Next.js App Router with TypeScript and a `src/` directory.
 - React components use `.tsx`; non-UI TypeScript uses `.ts`.
 - Next.js static export produces deployable files in `out/`.
-- Cloudflare Pages hosts the static output.
+- Cloudflare Workers Static Assets hosts the static output; V1 has no Worker request handler.
 - Writing will be stored as repository-local MDX.
 - Styling uses global design tokens and CSS Modules. Do not add Tailwind unless the design decision is explicitly revisited.
 - The design is dark, minimal, accessible, and mobile-first. It must remain usable at 320px wide.
@@ -24,14 +24,14 @@ Build `rishabhtamhane.com`, a minimal, elegant personal website for Rishabh's wr
 The deployment path is:
 
 ```text
-source code → npm run build → out/ → Cloudflare Pages
+source code → npm run build → out/ → Cloudflare Workers Static Assets
 ```
 
 ## Keep V1 small
 
 Do not add these without an explicit scope change:
 
-- a database, CMS, server API, or Cloudflare Worker;
+- a database, CMS, server API, or Worker request handler;
 - authentication;
 - comments, reactions, subscriptions, or search;
 - analytics;

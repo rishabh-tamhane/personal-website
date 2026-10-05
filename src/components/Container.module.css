@@ -1,0 +1,12 @@
+.container,
+.narrow {
+  width: min(
+    calc(100% - (var(--page-gutter) * 2)),
+    var(--container-width, var(--page-width))
+  );
+  margin-inline: auto;
+}
+
+.narrow {
+  --container-width: var(--reading-width);
+}
