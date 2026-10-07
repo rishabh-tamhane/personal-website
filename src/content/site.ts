@@ -23,9 +23,9 @@ export const site = {
   shortName: "RT",
   url: "https://rishabhtamhane.com",
   description:
-    "Projects, technical explorations, things I’m learning, and life beyond software.",
+    "Projects, technical explorations, things I’m learning and life beyond software.",
   introduction:
-    "Software engineer. Code, side projects, and whatever I’m curious about next.",
+    "Software engineer. Code, side projects and whatever I’m curious about next.",
   socialLinks: [
     {
       label: "GitHub",

@@ -1,0 +1,61 @@
+export const post = {
+  title: "Building a Key-Value Store from Scratch",
+  description:
+    "What a small storage engine taught me about logs, indexes and choosing the next useful constraint.",
+  publishedAt: "2026-10-06",
+  tags: ["Systems", "Storage"],
+  draft: true,
+  featured: true,
+};
+
+The fastest way for me to understand a system is to build a deliberately small
+version of it. A key-value store is a good example: the interface is tiny, but
+the implementation quickly exposes the tradeoffs behind durable software.
+
+## Start with the contract
+
+The first version supports only three operations:
+
+- `set(key, value)` records a value.
+- `get(key)` returns the newest value for a key.
+- `delete(key)` makes a key unavailable.
+
+That small contract keeps the first question focused: how should data survive a
+restart without making every write complicated?
+
+## Append first, organize second
+
+An append-only log is a useful starting point. Each mutation becomes one record
+at the end of a file. Appending is simple, and recovery can replay records in
+order to rebuild an in-memory index.
+
+| Choice              | Benefit                   | Cost                          |
+| ------------------- | ------------------------- | ----------------------------- |
+| Append-only log     | Simple, sequential writes | Old values remain on disk     |
+| In-memory index     | Fast reads                | Must be rebuilt after restart |
+| Periodic compaction | Reclaims stale records    | Adds background work          |
+
+The write path can stay intentionally boring:
+
+```ts
+type Record = {
+  key: string;
+  value: string | null;
+};
+
+async function set(key: string, value: string) {
+  await append({ key, value });
+  index.set(key, value);
+}
+```
+
+## What the small version reveals
+
+Even this toy design raises real systems questions. What happens if the process
+stops halfway through a record? When is a write truly durable? How large can the
+index become? Each answer introduces another constraint, so the useful habit is
+to add one constraint at a time and keep the behavior observable.
+
+The point was not to invent a production database. It was to make the hidden
+decisions visible—and to understand why mature storage engines look the way they
+do.

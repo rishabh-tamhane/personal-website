@@ -1,0 +1,177 @@
+export const post = {
+  title: "Why Majority Is About Memory, Not Voting",
+  description:
+    "Why quorum overlap lets distributed systems carry knowledge from one decision into the next.",
+  publishedAt: "2026-10-04",
+  tags: ["Distributed Systems", "Consensus"],
+  draft: true,
+  featured: true,
+};
+
+There’s a tiny idea behind a lot of distributed systems that I really like:
+
+If a majority of machines agree on something, then any other majority is
+guaranteed to share at least one machine with the first group.
+
+That sounds like basic arithmetic wearing a distributed-systems costume.
+
+But this overlap is doing a lot of work.
+
+Suppose we have five servers:
+
+```text
+A  B  C  D  E
+```
+
+A majority means more than half, so for five servers we need three.
+
+Imagine these three agree on:
+
+```text
+x = 10
+```
+
+The group is:
+
+```text
+A  B  C
+```
+
+Now suppose another group later needs to make a decision. Can it pick three
+completely different servers?
+
+No.
+
+There are only two servers outside the original group: `D` and `E`.
+
+So any new group of three has to include at least one of:
+
+```text
+A, B, C
+```
+
+For example:
+
+```text
+C  D  E
+```
+
+The two groups overlap at `C`.
+
+Poor `C`. It is now the one coworker who attended both meetings and has to
+explain what happened in the first one.
+
+## Why does that matter?
+
+Suppose `C` remembers that the earlier decision was:
+
+```text
+x = 10
+```
+
+Because `C` is also part of the new majority, information from the old decision
+has a path into the new one.
+
+The system does not need every machine to know everything.
+
+It just needs to make sure that a future decision-making group cannot completely
+avoid everyone who knew about the past.
+
+That is what a majority gives us.
+
+## What if we used smaller groups?
+
+Suppose we only required two machines to agree.
+
+One group could be:
+
+```text
+A  B
+```
+
+and another:
+
+```text
+D  E
+```
+
+No overlap.
+
+The first group might decide:
+
+```text
+x = 10
+```
+
+while the second, knowing nothing about it, decides:
+
+```text
+x = 20
+```
+
+Congratulations, we have now invented disagreement.
+
+The problem is not simply that two machines are “too few.”
+
+The problem is that two valid groups can exist without sharing any information.
+
+## The neat bit
+
+For `N` machines, a majority is:
+
+```text
+floor(N / 2) + 1
+```
+
+So:
+
+```text
+3 machines -> 2
+5 machines -> 3
+7 machines -> 4
+```
+
+Two groups that each contain more than half the machines cannot be disjoint.
+
+For five servers:
+
+```text
+3 + 3 = 6
+```
+
+But there are only five servers.
+
+So the groups must overlap.
+
+That shared machine becomes the bridge between the old decision and the new
+one.
+
+## Majority is really about preserving knowledge
+
+I used to think of a quorum as:
+
+> We need enough servers to vote.
+
+That is true, but I think a better mental model is:
+
+> We need groups large enough that future decisions cannot completely forget
+> the past.
+
+That is the real power of majority quorums.
+
+The same idea shows up in consensus protocols, replicated logs, leader election
+and distributed databases.
+
+Of course, overlap alone is not enough. The shared machine also has to remember
+the old information and use it correctly.
+
+If `C` joins the second meeting and says, “I wasn’t really paying attention last
+time,” we still have a problem.
+
+That is where protocols like Paxos add more rules.
+
+But underneath all of that is one very simple fact:
+
+**Any two majorities overlap.**
+
+Sometimes the important idea is just three plus three being greater than five.

@@ -1,13 +1,15 @@
 import Link from "next/link";
 import { Container } from "@/components/Container";
-import { EmptyState } from "@/components/EmptyState";
+import { PostList } from "@/components/PostList";
 import { ProjectList } from "@/components/ProjectList";
 import { getFeaturedProjects } from "@/content/projects";
 import { site } from "@/content/site";
+import { getFeaturedPosts } from "@/lib/content/posts";
 import styles from "./page.module.css";
 
-export default function HomePage() {
+export default async function HomePage() {
   const featuredProjects = getFeaturedProjects();
+  const featuredPosts = await getFeaturedPosts();
 
   return (
     <Container>
@@ -26,9 +28,11 @@ export default function HomePage() {
             </div>
             <Link href="/writing">View all writing</Link>
           </div>
-          <EmptyState
-            description="The first published articles will appear soon. I am still building the site."
-            title="Thoughts under construction."
+          <PostList
+            compact
+            emptyDescription="The first published articles will appear soon. I am still building the site."
+            headingLevel="h3"
+            posts={featuredPosts}
           />
         </section>
 

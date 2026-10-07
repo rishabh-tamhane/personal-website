@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/Container";
-import { EmptyState } from "@/components/EmptyState";
+import { PostList } from "@/components/PostList";
+import { getPublishedPosts } from "@/lib/content/posts";
 import styles from "../subpage.module.css";
 
 export const metadata: Metadata = {
@@ -8,7 +9,9 @@ export const metadata: Metadata = {
   description: "Writing by Rishabh Tamhane about software, learning and life.",
 };
 
-export default function WritingPage() {
+export default async function WritingPage() {
+  const posts = await getPublishedPosts();
+
   return (
     <Container narrow>
       <div className={styles.page}>
@@ -19,9 +22,9 @@ export default function WritingPage() {
             Things I learn, things I build and thoughts I don’t want to lose.
           </p>
         </header>
-        <EmptyState
-          description="The first published articles will appear soon. I am still building the site."
-          title="No published articles yet."
+        <PostList
+          emptyDescription="The first published articles will appear soon. I am still building the site."
+          posts={posts}
         />
       </div>
     </Container>

@@ -1,0 +1,141 @@
+.article {
+  padding-block: clamp(3.5rem, 10vw, 7rem);
+}
+
+.header {
+  margin-bottom: var(--space-7);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.backLink {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  margin-bottom: var(--space-5);
+  font-weight: 700;
+}
+
+.header h1 {
+  margin-bottom: var(--space-4);
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 9vw, 4.75rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.description {
+  margin-bottom: var(--space-5);
+  color: var(--color-text-muted);
+  font-size: clamp(1.0625rem, 3vw, 1.25rem);
+}
+
+.meta,
+.meta ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+}
+
+.meta {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.meta ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.meta ul::before {
+  color: var(--color-border);
+  content: "/";
+}
+
+.meta li {
+  color: var(--color-accent);
+}
+
+.content {
+  font-family: var(--font-serif);
+  font-size: clamp(1.0625rem, 2.5vw, 1.18rem);
+}
+
+.content :is(h2, h3) {
+  scroll-margin-top: var(--space-7);
+  font-family: var(--font-sans);
+  line-height: 1.2;
+}
+
+.content h2 {
+  margin-block: var(--space-7) var(--space-4);
+  font-size: clamp(1.6rem, 5vw, 2.25rem);
+}
+
+.content h3 {
+  margin-block: var(--space-6) var(--space-3);
+  font-size: 1.3rem;
+}
+
+.content p,
+.content ul,
+.content ol,
+.content table,
+.content figure {
+  margin-block: 0 var(--space-5);
+}
+
+.content li + li {
+  margin-top: var(--space-2);
+}
+
+.content :not(pre) > code {
+  padding: 0.12em 0.32em;
+  border: 1px solid var(--color-border);
+  border-radius: 0.3rem;
+  background: var(--color-surface);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+
+.content figure[data-rehype-pretty-code-figure] {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface);
+}
+
+.content pre {
+  margin: 0;
+  overflow-x: auto;
+  padding: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.content table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
+.content th,
+.content td {
+  min-width: 9rem;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.content th {
+  background: var(--color-surface-raised);
+}

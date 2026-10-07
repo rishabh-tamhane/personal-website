@@ -34,6 +34,10 @@ npm run verify        # Type-check, lint, and build
 npm run test:e2e      # Run browser tests once they are added
 ```
 
+Production builds use Next.js with Webpack because the MDX compilation pipeline
+relies on Webpack loaders. The output and Cloudflare deployment contract are
+otherwise unchanged.
+
 ## Deployment contract
 
 Cloudflare Workers Builds uses:
@@ -44,3 +48,14 @@ Cloudflare Workers Builds uses:
 - Node.js major version: `24`
 
 The `docs/` directory contains local planning and learning notes and is intentionally excluded from Git.
+
+## Writing content
+
+Articles live at `content/writing/<slug>/index.mdx`. The slug uses lowercase
+letters, numbers, and single hyphens. Each article exports a `post` metadata
+object and is registered in `src/lib/content/post-sources.ts` so Next.js can
+include it in the static build.
+
+Required metadata fields are `title`, `description`, `publishedAt`, `tags`, and
+`draft`. Set `featured: true` to include an article on the home page. Drafts are
+validated during the build but are excluded from public lists and routes.
